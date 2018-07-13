@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="js/jquery-1.6.4.js"></script>
+	<script type="text/javascript" src="js/jquery.signalR.js"></script> 
+</head>
+<body>
+
+<h1>SignalR JavaScript Client demonstration</h1>
+<h3>My first paragraph.</h3>
+
+<p id="messageFromController"></p>
+
+</body>
+  <script>
+	  var connection = $.hubConnection('http://localhost:51103');
+	  var myHubProxy = connection.createHubProxy('myhub');
+
+		myHubProxy.on("hello", function(message) {
+				console.log(message);
+				$('p').empty();
+				$('p').append(message);
+				}
+		);
+		
+		connection.start();
+	</script>
+</html>
